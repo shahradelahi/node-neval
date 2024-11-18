@@ -39,7 +39,7 @@
     "lint:fix": "eslint --fix .",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
-    "test": "mocha \"**/*.test.ts\" --retries 2",
+    "test": "mocha \"**/*.test.ts\"",
     "prepublishOnly": "pnpm test && pnpm lint && pnpm format:check && pnpm build"
   },
   "devDependencies": {

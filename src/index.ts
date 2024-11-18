@@ -9,7 +9,8 @@ import { EvalOptions } from './typings';
 
 export function neval(code: any, options: EvalOptions = {}) {
   if (!code) return;
-  const { timeout = 1e4, context = {}, bypassGlobal = [], strictGlobal = [] } = options;
+
+  const { timeout, context = {}, bypassGlobal = [], strictGlobal = [] } = options;
   const resultKey = 'SAFE_EVAL_' + Math.floor(Math.random() * 1000000);
   context[resultKey] = undefined;
 
@@ -83,12 +84,26 @@ Object.getOwnPropertyNames(this ?? {})
     String(`this.${resultKey} = ${resultKey};`),
   ].join(';\n');
 
-  code = runInNewContext(code, context, {
+  runInNewContext(code, context, {
     timeout,
     breakOnSigint: true,
+    contextCodeGeneration: {
+      wasm: options.allowWasm ?? false,
+    },
+    microtaskMode: timeout ? 'afterEvaluate' : undefined,
   });
 
-  return context[resultKey];
+  return timeout && typeof context[resultKey] === 'object' && 'then' in context[resultKey]
+    ? Promise.race([
+        new Promise((_, reject) =>
+          setTimeout(
+            () => reject(new Error('Script execution timed out after ' + timeout + 'ms')),
+            timeout
+          )
+        ),
+        context[resultKey],
+      ])
+    : context[resultKey];
 }
 
 export async function nevalFile(path: string, options: EvalOptions = {}) {

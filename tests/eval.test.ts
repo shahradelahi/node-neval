@@ -66,9 +66,9 @@ describe('Eval', () => {
 
   it('should reach the timeout', async () => {
     expect(() =>
-      neval('sleep()', {
+      neval('sleep(1000)', {
         timeout: 1,
-        context: { sleep: async () => await sleep(1e3) },
+        context: { sleep: async (ms: number) => await sleep(ms) },
       })
     ).to.throw('Script execution timed out after 1ms');
   });

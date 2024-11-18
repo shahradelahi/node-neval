@@ -66,7 +66,7 @@ describe('Eval', () => {
 
   it('should reach the timeout', async () => {
     expect(() =>
-      neval('sleep(100)', {
+      neval('sleep()', {
         timeout: 1,
         context: { sleep: async () => await sleep(1e3) },
       })

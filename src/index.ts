@@ -9,7 +9,8 @@ import { EvalOptions } from './typings';
 
 export function neval(code: any, options: EvalOptions = {}) {
   if (!code) return;
-  const { timeout = 1e4, context = {}, bypassGlobal = [], strictGlobal = [] } = options;
+
+  const { timeout, context = {}, bypassGlobal = [], strictGlobal = [] } = options;
   const resultKey = 'SAFE_EVAL_' + Math.floor(Math.random() * 1000000);
   context[resultKey] = undefined;
 
@@ -84,8 +85,11 @@ Object.getOwnPropertyNames(this ?? {})
   ].join(';\n');
 
   code = runInNewContext(code, context, {
-    timeout,
+    timeout: timeout ?? 10_000,
     breakOnSigint: true,
+    contextCodeGeneration: {
+      wasm: options.allowWasm ?? false,
+    },
   });
 
   return context[resultKey];

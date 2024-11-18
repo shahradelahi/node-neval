@@ -4,9 +4,13 @@ import type { SAFE_GLOBAL } from './constants';
 
 export interface EvalOptions {
   /**
-   * This parameter will set the maximum execution time for the code in milliseconds. Default: `10000` (`10 seconds`)
+   * This parameter will set the maximum execution time for the code in milliseconds. Default: `10000`
    */
   timeout?: number;
+  /**
+   * If set to false any attempt to compile a WebAssembly module will throw a WebAssembly.CompileError. Default: `false`.
+   */
+  allowWasm?: boolean;
   /**
    * Inject your own context globals into the sandbox
    *

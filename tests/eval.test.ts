@@ -65,14 +65,21 @@ describe('Eval', () => {
   });
 
   it('should reach the timeout', async () => {
-    const code = 'async function main(){ await sleep(100); return; }; main();';
-    expect(neval(`${code};main.constructor.name`, { context: { sleep } })).to.eq('AsyncFunction');
-    expect(() =>
-      neval(code, {
-        timeout: 1,
-        context: { sleep },
+    const code = `function loop() { while (1) Date.now(); };Promise.resolve().then(() => loop());`;
+    expect(() => neval(code, { timeout: 5, context: { console } })).to.throw(
+      'Script execution timed out after 5ms'
+    );
+
+    neval(`sleep(2000);`, {
+      timeout: 2,
+      context: { sleep },
+    })
+      .then(() => {
+        expect.fail('should throw error');
       })
-    ).to.throw('Script execution timed out after 1ms');
+      .catch((err: any) => {
+        expect(err.message).to.eq('Script execution timed out after 2ms');
+      });
   });
 
   it('should run async function', async () => {

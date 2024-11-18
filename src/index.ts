@@ -84,15 +84,26 @@ Object.getOwnPropertyNames(this ?? {})
     String(`this.${resultKey} = ${resultKey};`),
   ].join(';\n');
 
-  code = runInNewContext(code, context, {
-    timeout: timeout ?? 10_000,
+  runInNewContext(code, context, {
+    timeout,
     breakOnSigint: true,
     contextCodeGeneration: {
       wasm: options.allowWasm ?? false,
     },
+    microtaskMode: timeout ? 'afterEvaluate' : undefined,
   });
 
-  return context[resultKey];
+  return timeout && typeof context[resultKey] === 'object' && 'then' in context[resultKey]
+    ? Promise.race([
+        new Promise((_, reject) =>
+          setTimeout(
+            () => reject(new Error('Script execution timed out after ' + timeout + 'ms')),
+            timeout
+          )
+        ),
+        context[resultKey],
+      ])
+    : context[resultKey];
 }
 
 export async function nevalFile(path: string, options: EvalOptions = {}) {

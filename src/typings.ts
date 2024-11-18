@@ -4,7 +4,7 @@ import type { SAFE_GLOBAL } from './constants';
 
 export interface EvalOptions {
   /**
-   * This parameter will set the maximum execution time for the code in milliseconds. Default: `10000`
+   * This parameter will set the maximum execution time for the code in milliseconds.
    */
   timeout?: number;
   /**

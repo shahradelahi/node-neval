@@ -30,7 +30,7 @@ const result = neval('1 + 1');
 console.log(result); // 2
 
 const result2 = await nevalFile('./file.js');
-console.log(result2); // Whaterever file.js returns
+console.log(result2); // Whatever file.js returns
 
 const result3 = await neval(
   `
@@ -60,6 +60,8 @@ console.log(eval('1 + 1')); // 2
 ```
 
 Why is it important to register it globally? The `neval` is sandboxed and much more secure than just using the `eval` function. Read more about [eval](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval).
+
+Are you looking for more examples? Check out the [unit tests](/tests/eval.test.ts).
 
 ## 📚 Documentation
 

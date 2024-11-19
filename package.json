@@ -1,6 +1,6 @@
 {
   "name": "neval",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A Zero-dependency, lightweight utility for securely evaluating code in a sandboxed environment in Node.js.",
   "author": "Shahrad Elahi <shahrad@litehex.com> (https://github.com/shahradelahi)",
   "license": "MIT",

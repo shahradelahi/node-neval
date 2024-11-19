@@ -1,6 +1,6 @@
-# node-neval
+# node-eval
 
-[![CI](https://github.com/shahradelahi/node-neval/actions/workflows/ci.yml/badge.svg)](https://github.com/shahradelahi/node-neval/actions/workflows/ci.yml)
+[![CI](https://github.com/shahradelahi/node-eval/actions/workflows/ci.yml/badge.svg)](https://github.com/shahradelahi/node-eval/actions/workflows/ci.yml)
 [![NPM Version](https://img.shields.io/npm/v/neval.svg)](https://www.npmjs.com/package/neval)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](/LICENSE)
 [![Install Size](https://packagephobia.com/badge?p=neval)](https://packagephobia.com/result?p=neval)
@@ -77,7 +77,7 @@ function register(): void;
 
 ## 🤝 Contributing
 
-Want to contribute? Awesome! To show your support is to star the project, or to raise issues on [GitHub](https://github.com/shahradelahi/node-neval)
+Want to contribute? Awesome! To show your support is to star the project, or to raise issues on [GitHub](https://github.com/shahradelahi/node-eval)
 
 Thanks again for your support, it is much appreciated! 🙏
 

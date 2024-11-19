@@ -4,8 +4,8 @@
   "description": "A Zero-dependency, lightweight utility for securely evaluating code in a sandboxed environment in Node.js.",
   "author": "Shahrad Elahi <shahrad@litehex.com> (https://github.com/shahradelahi)",
   "license": "MIT",
-  "repository": "github:shahradelahi/node-neval",
-  "homepage": "https://github.com/shahradelahi/node-neval",
+  "repository": "github:shahradelahi/node-eval",
+  "homepage": "https://github.com/shahradelahi/node-eval",
   "keywords": [
     "nodejs",
     "neval",

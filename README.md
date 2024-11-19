@@ -42,13 +42,25 @@ const result3 = await neval(
 `,
   {
     context: {
-      sleep: async (ms) => {
+      sleep: async (ms: number) => {
         return new Promise((resolve) => setTimeout(resolve, ms));
       },
     },
   }
 );
 console.log(result3); // Result after 1 second is 2
+
+const result4 = await neval(
+  `
+    fetch('https://example.com', { method: 'HEAD' })
+      .then((resp) => resp.statusText);
+`,
+  {
+    // By default, the "fetch" API is not available, you must add it to the context
+    context: { fetch },
+  }
+);
+console.log(result4); // OK
 ```
 
 Importing `neval/register` will register the `neval` function on the global object and overrides the `eval` function.
